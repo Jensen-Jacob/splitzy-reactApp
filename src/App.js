@@ -1,3 +1,5 @@
+import { func } from "prop-types";
+
 const initialFriends = [
   {
     id: 118836,
@@ -20,5 +22,63 @@ const initialFriends = [
 ];
 
 export default function App() {
-  return <div>Hello World!</div>;
+  return (
+    <div className="app">
+      <div className="sidebar">
+        <FriendsList />
+        <FormAddFriend />
+        <Button className="button">Add Friend</Button>
+      </div>
+    </div>
+  );
+}
+
+function FriendsList() {
+  const friends = initialFriends;
+  return (
+    <ul>
+      {friends.map((friend, key) => (
+        <Friend friend={friend} key={friend.id} />
+      ))}
+    </ul>
+  );
+}
+
+function Friend({ friend }) {
+  return (
+    <li>
+      <img src={friend.image} alt={friend.name} />
+      <h3>{friend.name}</h3>
+      {friend.balance < 0 && (
+        <p className="red">
+          You owe {friend.name} ${Math.abs(friend.balance)}
+        </p>
+      )}
+      {friend.balance > 0 && (
+        <p className="green">
+          {friend.name} owes you ${Math.abs(friend.balance)}
+        </p>
+      )}
+      {friend.balance === 0 && <p>You and {friend.name} are even</p>}
+      <Button>Select</Button>
+    </li>
+  );
+}
+
+function Button({ children }) {
+  return <button className="button">{children}</button>;
+}
+
+function FormAddFriend() {
+  return (
+    <form className="form-add-friend">
+      <label>👫Friend Name</label>
+      <input type="text" />
+
+      <label>📸Image URL</label>
+      <input type="text" />
+
+      <Button>Add</Button>
+    </form>
+  );
 }
