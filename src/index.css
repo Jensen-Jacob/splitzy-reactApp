@@ -48,13 +48,17 @@ body {
   background-color: var(--color-dark);
 }
 
+.sidebar {}
+
 .sidebar ul {
+  max-height: 30rem;
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
   font-size: 1.4rem;
   margin-bottom: 2rem;
+  overflow: auto;
 }
 
 .sidebar li {
