@@ -48,7 +48,7 @@ export default function App() {
   }
 
   function handleSelectedFriend(friend) {
-    setSelectedFriend((f) => (friend !== f ? friend : null));
+    setSelectedFriend(friend);
     console.log(selectedFriend);
   }
 
@@ -67,7 +67,7 @@ export default function App() {
           {showAddFriendForm ? "Close" : "Add Friend"}
         </Button>
       </div>
-      {selectedFriend && <FormSplitBill />}
+      {selectedFriend && <FormSplitBill selectedFriend={selectedFriend} />}
     </div>
   );
 }
@@ -75,7 +75,7 @@ export default function App() {
 function FriendsList({ friends, onSelection, selectedFriend }) {
   return (
     <ul>
-      {friends.map((friend, key) => (
+      {friends.map((friend) => (
         <Friend
           friend={friend}
           key={friend.id}
@@ -104,7 +104,7 @@ function Friend({ friend, onSelection, selectedFriend }) {
       )}
       {friend.balance === 0 && <p>You and {friend.name} are even</p>}
       <Button className={"button"} onClick={() => onSelection(friend)}>
-        {selectedFriend == friend ? "Close" : "Select"}
+        {selectedFriend === friend ? "Close" : "Select"}
       </Button>
     </li>
   );
@@ -155,10 +155,10 @@ function FormAddFriend({ onAddFriend }) {
   );
 }
 
-function FormSplitBill() {
+function FormSplitBill({ selectedFriend }) {
   return (
     <form className="form-split-bill">
-      <h2>Split bill with name</h2>
+      <h2>Split bill with {selectedFriend.name}</h2>
 
       <label>💲 Bill Value</label>
       <input type="text" />
