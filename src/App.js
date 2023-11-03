@@ -48,7 +48,9 @@ export default function App() {
   }
 
   function handleSelectedFriend(friend) {
-    setSelectedFriend(friend);
+    setSelectedFriend((currSelected) =>
+      currSelected?.id === friend.id ? null : friend
+    );
     console.log(selectedFriend);
   }
 
@@ -88,8 +90,10 @@ function FriendsList({ friends, onSelection, selectedFriend }) {
 }
 
 function Friend({ friend, onSelection, selectedFriend }) {
+  const isSelected = selectedFriend?.id === friend.id;
+
   return (
-    <li>
+    <li className={isSelected ? "selected" : ""}>
       <img src={friend.image} alt={friend.name} />
       <h3>{friend.name}</h3>
       {friend.balance < 0 && (
@@ -104,7 +108,7 @@ function Friend({ friend, onSelection, selectedFriend }) {
       )}
       {friend.balance === 0 && <p>You and {friend.name} are even</p>}
       <Button className={"button"} onClick={() => onSelection(friend)}>
-        {selectedFriend === friend ? "Close" : "Select"}
+        {isSelected ? "Close" : "Select"}
       </Button>
     </li>
   );
@@ -156,23 +160,41 @@ function FormAddFriend({ onAddFriend }) {
 }
 
 function FormSplitBill({ selectedFriend }) {
+  const [billValue, setBillValue] = useState("");
+  const [userExpense, setUserExpense] = useState("");
+  const [friendsExpense, setFriendsExpense] = useState("");
+
+  function handleCalculation(e) {
+    setUserExpense(e.target.value);
+    const friendsExpense = billValue - userExpense;
+    setFriendsExpense(friendsExpense);
+  }
+
   return (
     <form className="form-split-bill">
       <h2>Split bill with {selectedFriend.name}</h2>
 
       <label>💲 Bill Value</label>
-      <input type="text" />
+      <input
+        type="text"
+        value={billValue}
+        onChange={(e) => setBillValue(e.target.value)}
+      />
 
       <label>🕴 Your Expense</label>
-      <input type="text" />
+      <input
+        type="text"
+        value={userExpense}
+        onChange={(e) => handleCalculation(e.target.value)}
+      />
 
-      <label>🕺 Friend's expense</label>
-      <input type="text" disabled />
+      <label>🕺 {selectedFriend.name}'s expense</label>
+      <input type="text" disabled value={friendsExpense} />
 
       <label>🤑 Who is paying?</label>
       <select name="" id="">
         <option value="user">You</option>
-        <option value="friend">Friend</option>
+        <option value={selectedFriend.id}>{selectedFriend.name}</option>
       </select>
 
       <div id="form-split-bill-buttons">
