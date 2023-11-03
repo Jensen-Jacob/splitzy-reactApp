@@ -3,6 +3,8 @@
   --color-light: #ffe8cc;
   --color-medium: #ffa94d;
   --color-dark: #ff922b;
+  --color-danger: #ff0000;
+  --color-danger-dark: #e31305;
 }
 
 * {
@@ -48,7 +50,62 @@ body {
   background-color: var(--color-dark);
 }
 
-.sidebar {}
+#form-split-bill-buttons {
+  text-align: center;
+  width: 25rem;
+  margin: auto;
+}
+
+.split-btn {
+  display: block;
+  width: 100%;
+  background-color: var(--color-medium);
+  color: #343a40;
+  padding: 0.8rem 3.2rem;
+  border: none;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.split-btn:hover {
+  background-color: var(--color-dark);
+}
+
+.close-btn {
+  /* display: inline; */
+  background-color: #00d150;
+  margin: 0.5rem 0.5rem 0;
+  color: #343a40;
+  padding: 0.8rem 0.5rem;
+  border: none;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.close-btn:hover {
+  background-color: #0eaa4a;
+}
+
+.delete-btn {
+  /* display: inline; */
+  background-color: var(--color-danger);
+  margin: 0.5rem 0.5rem 0;
+  color: #ffff;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.delete-btn:hover {
+  background-color: var(--color-danger-dark);
+}
 
 .sidebar ul {
   max-height: 30rem;
@@ -128,7 +185,7 @@ form {
 }
 
 .form-split-bill {
-  grid-template-columns: 1fr 12rem;
+  /* grid-template-columns: 1fr 12rem; */
   padding: 3.2rem 4rem;
 }
 

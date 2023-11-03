@@ -22,9 +22,9 @@ const initialFriends = [
   },
 ];
 
-function Button({ children, onClick, type }) {
+function Button({ children, className, onClick, type }) {
   return (
-    <button className="button" onClick={onClick} type={type}>
+    <button className={className} onClick={onClick} type={type}>
       {children}
     </button>
   );
@@ -51,7 +51,7 @@ export default function App() {
         {showAddFriendForm && (
           <FormAddFriend handleAddFriend={handleAddFriend} />
         )}
-        <Button onClick={handleShowAddFriendForm}>
+        <Button className={"button"} onClick={handleShowAddFriendForm}>
           {showAddFriendForm ? "Close" : "Add Friend"}
         </Button>
       </div>
@@ -86,7 +86,7 @@ function Friend({ friend }) {
         </p>
       )}
       {friend.balance === 0 && <p>You and {friend.name} are even</p>}
-      <Button>Select</Button>
+      <Button className={"button"}>Select</Button>
     </li>
   );
 }
@@ -129,7 +129,9 @@ function FormAddFriend({ handleAddFriend }) {
         onChange={(e) => setImageURL(e.target.value)}
       />
 
-      <Button type={"submit"}>Add</Button>
+      <Button className={"button"} type={"submit"}>
+        Add
+      </Button>
     </form>
   );
 }
@@ -154,7 +156,11 @@ function FormSplitBill() {
         <option value="friend">Friend</option>
       </select>
 
-      <Button>Split Bill</Button>
+      <div id="form-split-bill-buttons">
+        <Button className={"split-btn"}>Split Bill</Button>
+        <Button className={"delete-btn"}>Delete Friend</Button>
+        <Button className={"close-btn"}>Close</Button>
+      </div>
     </form>
   );
 }
