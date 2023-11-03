@@ -158,7 +158,6 @@ function FormSplitBill() {
       <div id="form-split-bill-buttons">
         <Button className={"split-btn"}>Split Bill</Button>
         <Button className={"delete-btn"}>Delete Friend</Button>
-        <Button className={"close-btn"}>Close</Button>
       </div>
     </form>
   );
